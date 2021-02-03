@@ -15,7 +15,7 @@ router.post('/signup', (req, res) => {
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "14d" });
             res.status(200).json({
                 user: user,
-                message: "The Q&A user was created",
+                message: "The Nathan's List user was created",
                 sessionToken: token
             })
         })
@@ -29,7 +29,9 @@ router.post('/signin', (req, res) => {
             username: req.body.username
         }
     })
+    
         .then(user => {
+            console.log('Hit')
             if (user) {
                 bcrypt.compare(req.body.password, user.password, (err, matches) => {
                     if (matches) {
@@ -37,7 +39,7 @@ router.post('/signin', (req, res) => {
 
                         res.status(200).json({
                             user: user,
-                            message: "Q&A user has been authenticated",
+                            message: "User has been authenticated",
                             sessionToken: token
                         })
 

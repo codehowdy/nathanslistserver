@@ -6,7 +6,7 @@ const employer = require('../db').import('../models/employer');
 
 router.get("/", (req, res) => {
     employer.findAll()
-    .then(employer => res.status(200).json(questions))
+    .then(employer => res.status(200).json(employer))
     .catch(err => res.status(500).json({ error: err}))
 });
 
@@ -22,8 +22,8 @@ router.post('/post', (req, res) => {
         title: req.body.title,
         category: req.body.category,
         entry: req.body.entry,
-        owner: req.body.owner,
-        //userId: req.user.id,
+        
+        
     }
     employer.create(employerEntry)
         .then(employer => res.status(200).json(employer))
@@ -62,5 +62,7 @@ router.delete("/delete/:id", function (req, res) {
         .then(() => res.status(200).json({ message: "Employer Entry Removed" }))
         .catch((err) => res.status(500).json({ error: err }));
 });
+
+
 
 module.exports = router;
